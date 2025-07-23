@@ -1,6 +1,6 @@
 <!-- Bootstrap 5.3.3 JS Bundle (includes Popper.js) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+</script>
 <!-- JS Scripts -->
 <script>
     document.querySelectorAll('.whatsapp-form').forEach(function (form) {
@@ -93,17 +93,18 @@ Message: ${message}`;
                     <img src="<?= $base_url ?>assets/images/others/instagram.webp" alt="insta" class="img-fluid"
                         width="30px">
                 </a>
-                 <a href="https://www.linkedin.com/in/abhinav-kumar-24240118?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class=" me-3 text-decoration-none">
+                <a href="https://www.linkedin.com/in/abhinav-kumar-24240118?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                    target="_blank" class=" me-3 text-decoration-none">
                     <img src="<?= $base_url ?>assets/images/others/linkedin.webp" alt="twitter" class="img-fluid"
                         width="30px">
                 </a>
                 <a href="#" class=" me-3 text-decoration-none">
-                    <img src="<?= $base_url ?>assets/images/others/twitter.webp" alt="twitter" target="_blank" class="img-fluid"
-                        width="30px">
+                    <img src="<?= $base_url ?>assets/images/others/twitter.webp" alt="twitter" target="_blank"
+                        class="img-fluid" width="30px">
                 </a>
                 <a href="#" class="text-decoration-none">
-                    <img src="<?= $base_url ?>assets/images/others/youtube.webp" alt="insta" target="_blank" class="img-fluid"
-                        width="30px">
+                    <img src="<?= $base_url ?>assets/images/others/youtube.webp" alt="insta" target="_blank"
+                        class="img-fluid" width="30px">
                 </a>
             </div>
         </div>
@@ -160,7 +161,8 @@ Message: ${message}`;
             <script>
                 document.write(new Date().getFullYear());
             </script>
-            &copy; Skin Centre. All rights reserved | Designed & Managed By <a href="" target="_blank"
+            &copy; Skin Centre. All rights reserved | Designed & Managed By <a
+                href="https://share.google/QcX5gkCJNZloMYGe5" target="_blank"
                 class="text-decoration-none text-white">Digital Web Seo Ads Agency</a>
         </p>
     </div>

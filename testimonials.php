@@ -50,32 +50,104 @@
         </div>
     </section>
     <!-- ====================================================== -->
-    <section class="py-5">
+    <section class="py-5 bg-light">
         <div class="container">
-            <h2>Reviews From Our Client</h2>
+            <h2 class="mb-5 text-center">Reviews From Our Clients</h2>
             <div class="row" id="google-reviews-list"></div>
         </div>
     </section>
+
+    <style>
+        .review-box {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            height: 100%;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .review-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .review-box .client-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid #f7941e;
+        }
+
+        .review-box .star {
+            color: #f7941e;
+            font-size: 18px;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .review-author {
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #333;
+        }
+
+        .review-text {
+            color: #555;
+            font-size: 15px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+
+    <script>
+        fetch("google-reviews.php")
+            .then(res => res.json())
+            .then(reviews => {
+                let html = "";
+                reviews.forEach(review => {
+                    const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                    html += `
+                <div class="col-md-6 col-lg-6 mb-4 d-flex">
+                    <div class="review-box">
+                        <div class="review-header">
+                            <div>
+                                <div class="review-author">${review.author_name}</div>
+                                <div class="star">${stars}</div>
+                            </div>
+                        </div>
+                        <div class="review-text">"${review.text}"</div>
+                    </div>
+                </div>`;
+                });
+                document.getElementById("google-reviews-list").innerHTML = html;
+            })
+            .catch(err => {
+                document.getElementById("google-reviews-list").innerHTML =
+                    "<p class='text-danger'>Unable to load reviews.</p>";
+                console.error(err);
+            });
+    </script>
     <!-- ====================================================== -->
     <?php include 'common/footer.php'; ?>
     <!-- ======================================================== -->
 </body>
-<script>
-    fetch("google-reviews.php")
-        .then(res => res.json())
-        .then(reviews => {
-            let html = "";
-            reviews.forEach(review => {
-                html += `<div class="col-md-6 mb-4">
-                <div class="review-box">
-                    <p>⭐ ${review.rating}</p>
-                    <p>"${review.text}"</p>
-                    <p><strong>- ${review.author_name}</strong></p>
-                </div>
-            </div>`;
-            });
-            document.getElementById("google-reviews-list").innerHTML = html;
-        });
-</script>
 
 </html>

@@ -91,17 +91,17 @@
         </section>
         <!-- =============================================================================================== -->
         <style>
-        .services .service-card {
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
+            .services .service-card {
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                border-radius: 10px;
+                transition: transform 0.3s ease;
+            }
 
-        .services .services-card img {
-            height: 200px;
-            object-fit: cover;
-            background-color: var(--primary-color);
-        }
+            .services .services-card img {
+                height: 200px;
+                object-fit: cover;
+                background-color: var(--primary-color);
+            }
         </style>
         <section class="py-5 services bg-white">
             <div class="container">
@@ -315,16 +315,57 @@
         </script> -->
 
         <!-- ==================================================================================== -->
-        <section class="py-5">
+        <!-- Style (can go in your CSS file) -->
+        <style>
+            .review-box {
+                background: #fff;
+                border-radius: 20px;
+                padding: 25px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+                transition: all 0.3s ease-in-out;
+                height: 100%;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .review-box:hover {
+                transform: translateY(-5px);
+            }
+
+            .review-box .profile-img {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 2px solid #00aaff;
+                margin-bottom: 10px;
+            }
+
+            .review-box .star-rating {
+                color: #f7b500;
+                font-size: 1.2rem;
+            }
+
+            .review-box .quote {
+                font-style: italic;
+                color: #555;
+                margin: 15px 0;
+            }
+
+            .review-box .reviewer {
+                font-weight: bold;
+                color: #333;
+            }
+        </style>
+
+        <section class="py-5" style="background-color: #f5f8ff;">
             <div class="container">
-                <div class="row">
-                    <div class="head-title mb-3">
-                        <p>Testimonials</p>
-                        <h2>What Our Patients Say</h2>
-                    </div>
-                    <div class="swiper googleReviewSwiper">
-                        <div class="swiper-wrapper" id="google-reviews-slider"></div>
-                    </div>
+                <div class="head-title">
+                    <p class="">Testimonials</p>
+                    <h2 class=" mb-5">What Our Clients Say</h2>
+                </div>
+                <div class="swiper googleReviewSwiper">
+                    <div class="swiper-wrapper" id="google-reviews-slider"></div>
                 </div>
             </div>
         </section>
@@ -332,13 +373,13 @@
         <?php include 'youtube.php'; ?>
         <!-- ====================================================================================== -->
         <style>
-        .latest-blogs .card img {
-            height: 250px;
-            width: 100%;
-            width: 100%;
-            object-fit: contain;
-            background-color: var(--primary-color);
-        }
+            .latest-blogs .card img {
+                height: 250px;
+                width: 100%;
+                width: 100%;
+                object-fit: contain;
+                background-color: var(--primary-color);
+            }
         </style>
         <section class="py-5 latest-blogs">
             <div class="container">
@@ -363,23 +404,23 @@
                             $coverImage = "admin/uploads/blogs/" . htmlspecialchars($row['cover_image']);
                             $createdAt = date("d M Y", strtotime($row['created_at']));
                             ?>
-                        <div class="col-md-4 mb-4">
-                            <a href="blogs/<?= $slug; ?>" class="text-decoration-none text-dark">
-                                <div class="card h-100 shadow-sm border-0">
-                                    <img src="<?= $coverImage; ?>" class="card-img-top" alt="<?= $coverAlt; ?>"
-                                        title="<?= $coverTitle; ?>">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= $coverTitle; ?></h5>
-                                        <p class="card-text">
-                                            <?= mb_strimwidth($coverDesc, 0, 160, '...'); ?>
-                                        </p>
+                            <div class="col-md-4 mb-4">
+                                <a href="blogs/<?= $slug; ?>" class="text-decoration-none text-dark">
+                                    <div class="card h-100 shadow-sm border-0">
+                                        <img src="<?= $coverImage; ?>" class="card-img-top" alt="<?= $coverAlt; ?>"
+                                            title="<?= $coverTitle; ?>">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?= $coverTitle; ?></h5>
+                                            <p class="card-text">
+                                                <?= mb_strimwidth($coverDesc, 0, 160, '...'); ?>
+                                            </p>
+                                        </div>
+                                        <div class="card-footer bg-white border-0">
+                                            <small class="text-muted">Published on <?= $createdAt; ?></small>
+                                        </div>
                                     </div>
-                                    <div class="card-footer bg-white border-0">
-                                        <small class="text-muted">Published on <?= $createdAt; ?></small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
                         <?php } ?>
 
                     </div>
@@ -391,60 +432,68 @@
         <!-- ============================================================================= -->
     </main>
 </body>
+<!-- Script -->
 <script>
-fetch("google-reviews.php")
-    .then(res => res.json())
-    .then(reviews => {
-        let html = "";
-        reviews.forEach(review => {
-            html += `<div class="swiper-slide">
-                <div class="review-box">
-                    <p>⭐ ${review.rating}</p>
-                    <p>"${review.text}"</p>
-                    <p><strong>- ${review.author_name}</strong></p>
-                </div>
-            </div>`;
-        });
-        document.getElementById("google-reviews-slider").innerHTML = html;
+    fetch("google-reviews.php?t=" + new Date().getTime())
+        .then(res => res.json())
+        .then(reviews => {
+            let html = "";
+            reviews.forEach(review => {
+                let fullText = review.text;
+                let shortText = fullText.length > 500 ? fullText.substring(0, 500) + "..." : fullText;
 
-        new Swiper(".googleReviewSwiper", {
-            slidesPerView: 1,
-            spaceBetween: 20,
-            autoplay: {
-                delay: 5000
-            },
-            breakpoints: {
-                768: {
-                    slidesPerView: 2
+                html += `<div class="swiper-slide">
+                    <div class="review-box">
+                        <div class="star-rating" style="color:#fbc02d; font-size: 20px;">${"★".repeat(review.rating)}${"☆".repeat(5 - review.rating)}</div>
+                        <p>"${shortText}"</p>
+                        <p><strong>- ${review.author_name}</strong></p>
+                    </div>
+                </div>`;
+            });
+            document.getElementById("google-reviews-slider").innerHTML = html;
+
+            new Swiper(".googleReviewSwiper", {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
                 },
-                992: {
-                    slidesPerView: 3
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2
+                    },
+                    992: {
+                        slidesPerView: 3
+                    }
+                },
+                loop: true,
+                speed: 600,
+                grabCursor: true,
+            });
+        });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const counters = document.querySelectorAll('.counter');
+
+        counters.forEach(counter => {
+            counter.innerText = '0';
+            const updateCounter = () => {
+                const target = +counter.getAttribute('data-target');
+                const current = +counter.innerText;
+                const increment = target / 200;
+
+                if (current < target) {
+                    counter.innerText = `${Math.ceil(current + increment)}`;
+                    setTimeout(updateCounter, 10);
+                } else {
+                    counter.innerText = target + "+";
                 }
-            },
-            loop: true,
+            };
+            updateCounter();
         });
     });
 </script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const counters = document.querySelectorAll('.counter');
 
-    counters.forEach(counter => {
-        counter.innerText = '0';
-        const updateCounter = () => {
-            const target = +counter.getAttribute('data-target');
-            const current = +counter.innerText;
-            const increment = target / 200;
-
-            if (current < target) {
-                counter.innerText = `${Math.ceil(current + increment)}`;
-                setTimeout(updateCounter, 10);
-            } else {
-                counter.innerText = target + "+";
-            }
-        };
-        updateCounter();
-    });
-});
-</script>
 </html>
